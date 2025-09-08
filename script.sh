@@ -10,7 +10,10 @@ readfile() {
     local LINE=1
     while read -r CURRENT_LINE
     do
-        echo "$LINE: $CURRENT_LINE"
+        if [[ -n "$CURRENT_LINE" && $CURRENT_LINE != "#"* ]]; then
+            echo "$LINE: $CURRENT_LINE"
+        fi
+
         ((LINE++))
     done < "$1" 
 }
@@ -47,6 +50,8 @@ while true; do
             ;;
         3)
             echo "Quiting...."
+            sleep 0.8
+            clear
             break 
             ;;
         *)
