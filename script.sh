@@ -1,6 +1,7 @@
 #! /bin/bash
 
 readfile() {
+    clear
     if [ ! -f "$1" ]; then
         echo "ERROR: The archive '$1' is not in the principal paste "
         return 1 
@@ -28,26 +29,30 @@ generatePermission() {
 
 generatePermission
 
-echo "Select 1 File"
+while true; do
+    echo "Select your instalation File:"
+    echo "1) Development Tools (dev-tools.txt)"
+    echo "2) Essencial Tools (essencial-tools.txt)"
+    echo "3) Quir"
+    
+    read -p "Select one: " choice
+    echo "" 
 
-PS3='Please enter your choice: '
-
-options=("dev-tools.txt" "essencial-tools.txt" "quit")
-
-selectedOption="";
-select opt in "${options[@]}"
-do
-    case $opt in
-        "dev-tools.txt")
+    case $choice in
+        1)
             readfile "dev-tools.txt"
             ;;
-        "essencial-tools.txt")
+        2)
             readfile "essencial-tools.txt"
             ;;
-        "quit")
-            break
+        3)
+            echo "Quiting...."
+            break 
             ;;
-        *) echo "invalid Option"
+        *)
+            echo "Invalid option: '$choice'."
+            echo ""
+            ;;
     esac
 done
     
