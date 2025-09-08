@@ -7,14 +7,21 @@ readfile() {
         return 1 
     fi
 
-    local LINE=1
-    while read -r CURRENT_LINE
-    do
-        if [[ -n "$CURRENT_LINE" && $CURRENT_LINE != "#"* ]]; then
-            echo "$LINE: $CURRENT_LINE"
-        fi
+    local LINE=0
 
+    while IFS= read -r CURRENT_LINE || [[ -n "$CURRENT_LINE" ]]
+    do
         ((LINE++))
+        if [[ -n "$CURRENT_LINE" && $CURRENT_LINE != "#"* ]]; then
+
+            if [[ $CURRENT_LINE == "!"* ]]; then
+                package_name="${CURRENT_LINE:1}"
+                echo "$LINE: Instalando AUR: $package_name (com yay)"
+            else
+                echo "$LINE: Instalando: $CURRENT_LINE (com pacman)"
+            fi
+            
+        fi
     done < "$1" 
 }
 

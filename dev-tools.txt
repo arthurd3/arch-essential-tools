@@ -1,4 +1,6 @@
-# Pacotes dos repositórios oficiais (instalar com pacman)
+# Dev tools
+# To increment more AUR (yay) Packages just write in file with !
+
 
 # Essenciais
 base-devel
@@ -42,3 +44,7 @@ redis
 
 # APIs
 insomnia
+
+! jetbrains-toolbox
+! postman-bin
+! eu
