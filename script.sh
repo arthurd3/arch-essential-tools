@@ -37,7 +37,13 @@ generatePermission() {
     sudo chmod u+x script.sh
 }
 
+installAUR() {
+    
+    sudo pacman -S yay
+}
+
 generatePermission
+installAUR 
 
 while true; do
     echo "Select your instalation File:"

@@ -1,1 +1,3 @@
-# essencial-tools
+# Essencial Tools
+# To increment more AUR (yay) Packages just write in file with !
+# And to you comment or ignore anything just press space or #
