@@ -38,8 +38,30 @@ generatePermission() {
 }
 
 installAUR() {
+    if yay --version &> /dev/null; then
+        return
+    fi
     
-    sudo pacman -S yay
+    read -p "Install AUR (yay). Continue install [y/n]:" choice
+    
+    case "$choice" in
+        y|Y)
+            #Install AUR(yay) from github
+            sudo pacman -S --needed --noconfirm git base-devel
+            git clone https://aur.archlinux.org/yay.git
+            cd yay
+            makepkg -si --noconfirm
+            cd ..
+            rm -rf yay
+            ;;
+        *)
+            echo "AUR (yay) installation is not confirmed..."
+            sleep 0.8
+            clear
+            return
+            ;;
+    esac
+    return
 }
 
 generatePermission
@@ -49,7 +71,8 @@ while true; do
     echo "Select your instalation File:"
     echo "1) Development Tools (dev-tools.txt)"
     echo "2) Essencial Tools (essencial-tools.txt)"
-    echo "3) Quit"
+    echo "3) Install AUR (yay) "
+    echo "4) Quit"
     
     read -p "Select one: " choice
     echo "" 
@@ -62,6 +85,9 @@ while true; do
             readfile "essencial-tools.txt"
             ;;
         3)
+            installAUR
+            ;;    
+        4)
             echo "Quiting...."
             sleep 0.8
             clear
