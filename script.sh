@@ -14,6 +14,20 @@ readfile() {
     done < "$1" 
 }
 
+generatePermission() {
+    ##Get Status Permission on Terminal -> 744 
+    permissions=$(stat -c "%a" script.sh)
+    
+    if [[ "$permissions" == "744" ]]; then    
+        return
+    fi
+
+    echo "Generating permission u+x to you run your Script"
+    sudo chmod u+x script.sh
+}
+
+generatePermission
+
 echo "Select 1 File"
 
 PS3='Please enter your choice: '
