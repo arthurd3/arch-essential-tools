@@ -1,32 +1,39 @@
 #! /bin/bash
 
-echo "Hello World"
+readfile() {
+    if [ ! -f "$1" ]; then
+        echo "ERROR: The archive '$1' is not in the principal paste "
+        return 1 
+    fi
 
-read a
-read b
-read c
-
-echo $a , $b , $c
-
-echo "For Conditional"
-for i in {1..5}
-do
-    echo $i 
-done
-
-
-echo "While Conditional"
-i=1
-while [[ $i -le 10 ]] ; do
-    echo "$i"
-    ((i += 1))
-done
-
-
-echo "While to Read a TXT file"
-LINE=1
-while read -r CURRENT_LINE
+    local LINE=1
+    while read -r CURRENT_LINE
     do
         echo "$LINE: $CURRENT_LINE"
-    ((LINE++))
-done < "dev-tools.txt"
+        ((LINE++))
+    done < "$1" 
+}
+
+echo "Select 1 File"
+
+PS3='Please enter your choice: '
+
+options=("dev-tools.txt" "essencial-tools.txt" "quit")
+
+selectedOption="";
+select opt in "${options[@]}"
+do
+    case $opt in
+        "dev-tools.txt")
+            readfile "dev-tools.txt"
+            ;;
+        "essencial-tools.txt")
+            readfile "essencial-tools.txt"
+            ;;
+        "quit")
+            break
+            ;;
+        *) echo "invalid Option"
+    esac
+done
+    
