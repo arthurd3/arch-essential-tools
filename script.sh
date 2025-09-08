@@ -16,7 +16,7 @@ readfile() {
 }
 
 generatePermission() {
-    ##Get Status Permission on Terminal -> 744 
+    ##Get Status Permission (scirpt.sh) on Terminal -> 744 
     permissions=$(stat -c "%a" script.sh)
     
     if [[ "$permissions" == "744" ]]; then    
@@ -33,7 +33,7 @@ while true; do
     echo "Select your instalation File:"
     echo "1) Development Tools (dev-tools.txt)"
     echo "2) Essencial Tools (essencial-tools.txt)"
-    echo "3) Quir"
+    echo "3) Quit"
     
     read -p "Select one: " choice
     echo "" 
