@@ -10,6 +10,7 @@ git
 code
 neovim
 vim
+kitty
 
 # Terminal
 zsh
@@ -38,9 +39,11 @@ clang
 cmake
 
 # DataBases
+
 postgresql
 sqlite
 redis
+dbeaver
 
 # APIs
 insomnia

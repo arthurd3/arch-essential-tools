@@ -69,25 +69,33 @@ installAUR
 
 while true; do
     echo "Select your instalation File:"
-    echo "1) Development Tools (dev-tools.txt)"
-    echo "2) Essencial Tools (essencial-tools.txt)"
-    echo "3) Install AUR (yay) "
-    echo "4) Quit"
+    echo "1) Complet Stup instalation"
+    echo "2) Development Tools (dev-tools.txt)"
+    echo "3) Essencial Tools (essencial-tools.txt)"
+    echo "4) Install AUR (yay) "
+    echo "5) Generate MountDisk script."
+    echo "6) Quit"
     
     read -p "Select one: " choice
     echo "" 
 
     case $choice in
         1)
+            ;;
+
+        2)
             readfile "dev-tools.txt"
             ;;
-        2)
+        3)
             readfile "essencial-tools.txt"
             ;;
-        3)
-            installAUR
-            ;;    
         4)
+            installAUR
+            ;;   
+        5)
+            ;;
+
+        6)
             echo "Quiting...."
             sleep 0.8
             clear
