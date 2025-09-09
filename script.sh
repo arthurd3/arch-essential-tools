@@ -3,7 +3,7 @@
 readfile() {
     clear
     if [ ! -f "$1" ]; then
-        echo "ERROR: The archive '$1' is not in the principal paste "
+        echo "ERROR: The archive '$1' is not in the tools paste "
         return 1 
     fi
 
@@ -16,9 +16,9 @@ readfile() {
 
             if [[ $CURRENT_LINE == "!"* ]]; then
                 package_name="${CURRENT_LINE:1}"
-                echo "$LINE: Instalando AUR: $package_name (com yay)"
+                echo "$LINE: Intalling AUR: $package_name (with yay)"
             else
-                echo "$LINE: Instalando: $CURRENT_LINE (com pacman)"
+                echo "$LINE: Intalling: $CURRENT_LINE (with pacman)"
             fi
             
         fi
@@ -69,7 +69,7 @@ installAUR
 
 while true; do
     echo "Select your instalation File:"
-    echo "1) Complet Stup instalation"
+    echo "1) Complet Stup instalation + configuration"
     echo "2) Development Tools (dev-tools.txt)"
     echo "3) Essencial Tools (essencial-tools.txt)"
     echo "4) Install AUR (yay) "
@@ -84,10 +84,10 @@ while true; do
             ;;
 
         2)
-            readfile "dev-tools.txt"
+            readfile "tools/dev-tools.txt"
             ;;
         3)
-            readfile "essencial-tools.txt"
+            readfile "tools/essencial-tools.txt"
             ;;
         4)
             installAUR
