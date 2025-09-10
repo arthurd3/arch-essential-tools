@@ -64,6 +64,39 @@ installAUR() {
     return
 }
 
+
+mountDisk() {
+
+    sudo pacman -S dialog
+
+    mkdir -p dir1 dir2 "Diretório com Espaços"
+    dirs=("dir1" "dir2" "Diretório com Espaços")
+
+    options=()
+    i=1
+    for dirname in "${dirs[@]}"; do
+        options+=("$i" "$dirname")
+        ((i++))
+    done
+
+    selection=$(dialog --title "Seleção de Diretório" \
+                    --menu "Por favor, escolha um dos diretórios abaixo:" \
+                    15 50 4 \
+                    --output-fd 1 \
+                    "${options[@]}")
+
+    clear
+
+    if [ -n "$selection" ]; then
+        selected_dir="${dirs[$((selection-1))]}"
+        echo "✅ Você selecionou o diretório: '$selected_dir'"
+    else
+        echo "❌ Seleção cancelada pelo usuário."
+    fi
+
+    rm -r dir1 dir2 "Diretório com Espaços"
+}
+
 generatePermission
 installAUR 
 
@@ -93,6 +126,7 @@ while true; do
             installAUR
             ;;   
         5)
+            mountDisk
             ;;
 
         6)
