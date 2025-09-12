@@ -1,11 +1,30 @@
 #! /bin/bash
 
-readfile() {
-    clear
+verifyPaste() {
     if [ ! -f "$1" ]; then
         echo "ERROR: The archive '$1' is not in the tools paste "
-        return 1 
+        sleep 0.7
+        clear
+        break;
     fi
+}
+
+generatePermission() {
+    ##Get Status Permission (scirpt.sh) on Terminal -> 744 
+    permissions=$(stat -c "%a" script.sh)
+    
+    if [[ "$permissions" == "744" ]]; then    
+        return
+    fi
+
+    echo "Generating permission u+x to you run your Script"
+    sudo chmod u+x script.sh
+}
+
+readfile() {
+    clear
+
+    verifyPaste $1
 
     local LINE=0
 
@@ -23,18 +42,6 @@ readfile() {
             
         fi
     done < "$1" 
-}
-
-generatePermission() {
-    ##Get Status Permission (scirpt.sh) on Terminal -> 744 
-    permissions=$(stat -c "%a" script.sh)
-    
-    if [[ "$permissions" == "744" ]]; then    
-        return
-    fi
-
-    echo "Generating permission u+x to you run your Script"
-    sudo chmod u+x script.sh
 }
 
 installAUR() {
@@ -64,11 +71,10 @@ installAUR() {
     return
 }
 
-
 mountDisk() {
 
     if ! pacman -Qq ntfs-3g &> /dev/null; then
-        echo "Instalando ntfs-3g..."
+        echo "Intalling ntfs-3g..."
         sudo pacman -S --noconfirm ntfs-3g
     fi
 
@@ -76,7 +82,7 @@ mountDisk() {
     
     case "$choice" in
         "")
-            echo "default selection"
+            defaultDirectoryDisk
             ;;
         *)
             selectDirectoryDisk
@@ -99,7 +105,30 @@ selectDirectoryDisk() {
         echo "You select dir: '$selected_dir'"
     else
         echo "Nothing dir select quiting...."
+        sleep 0.7
+        clear
+        break;
     fi
+
+}
+
+defaultDirectoryDisk() {
+
+    verifyPaste "tools/mount-disc.txt"
+
+    #Default installation is in /run/media/arthurd3/ThuzinMemoria , with ThuzinMemoria name
+    local LINE=0
+
+    while IFS= read -r CURRENT_LINE || [[ -n "$CURRENT_LINE" ]]
+    do
+        ((LINE++))
+        if [[ -n "$CURRENT_LINE" && $CURRENT_LINE != "#"* ]]; then
+            echo "$LINE: Default Installation: $package_name  $CURRENT_LINE"
+        fi
+    done < "tools/mount-disc.txt" 
+
+    sleep 0.8
+    clear
 
 }
 
@@ -120,6 +149,7 @@ while true; do
 
     case $choice in
         1)
+
             ;;
 
         2)
