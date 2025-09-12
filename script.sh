@@ -67,14 +67,30 @@ installAUR() {
 
 mountDisk() {
 
-    sudo pacman -S dialog
+    if ! pacman -Qq ntfs-3g &> /dev/null; then
+        echo "Instalando ntfs-3g..."
+        sudo pacman -S --noconfirm ntfs-3g
+    fi
+
+    read -p "You want select default or select a directory? Enter(Default) / AnyKey(Select Dir) :" choice
+    
+    case "$choice" in
+        "")
+            echo "default selection"
+            ;;
+        *)
+            selectDirectoryDisk
+            ;;
+    esac
+    return
+}
+
+selectDirectoryDisk() {
 
     if ! command -v zenity &> /dev/null; then
         echo "Installing zenity..."
         sudo pacman -S --noconfirm zenity
     fi
-
-    if
 
     selected_dir=$(zenity --file-selection --directory --title="Select a dir to MOUNT")
     clear
@@ -84,6 +100,7 @@ mountDisk() {
     else
         echo "Nothing dir select quiting...."
     fi
+
 }
 
 generatePermission

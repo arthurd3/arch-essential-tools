@@ -1,6 +1,6 @@
 # Dev tools
 # To increment more AUR (yay) Packages just write in file with !
-# And to you comment or ignore anything just press space or #
+# And to you comment or ignore anything just press space or write #
 
 # Essenciais
 base-devel
