@@ -1,0 +1,5 @@
+sudo mkdir -p /run/media/arthurd3/ThuzinMemoria
+
+sudo mount -t ntfs-3g /dev/sda1 /run/media/arthurd3/ThuzinMemoria
+
+
