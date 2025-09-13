@@ -132,6 +132,12 @@ defaultDirectoryDisk() {
 
 }
 
+fullInstalation() {
+    readfile "tools/dev-tools.txt"
+    readfile "tools/essencial-tools.txt"
+    mountDisk
+}
+
 generatePermission
 installAUR 
 
@@ -149,7 +155,7 @@ while true; do
 
     case $choice in
         1)
-
+            fullInstalation
             ;;
 
         2)

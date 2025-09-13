@@ -51,3 +51,4 @@ insomnia
 ! jetbrains-toolbox
 ! postman-bin
 ! eu
+!
