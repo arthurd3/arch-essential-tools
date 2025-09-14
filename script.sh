@@ -123,7 +123,7 @@ defaultDirectoryDisk() {
     do
         ((LINE++))
         if [[ -n "$CURRENT_LINE" && $CURRENT_LINE != "#"* ]]; then
-            echo "$LINE: Default Installation: $package_name  $CURRENT_LINE"
+            echo "$LINE: Defaoult Mounting: $package_name  $CURRENT_LINE"
         fi
     done < "tools/mount-disc.txt" 
 
