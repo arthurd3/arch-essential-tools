@@ -148,7 +148,8 @@ while true; do
     echo "3) Essencial Tools (essencial-tools.txt)"
     echo "4) Install AUR (yay) "
     echo "5) Generate MountDisk script."
-    echo "6) Quit"
+    echo "6) When Restart your pc Shutdown in your docker conteiners"
+    echo "7) Quit"
     
     read -p "Select one: " choice
     echo "" 
@@ -170,8 +171,9 @@ while true; do
         5)
             mountDisk
             ;;
-
         6)
+            ;;
+        7)
             echo "Quiting...."
             sleep 0.8
             clear
